@@ -16,22 +16,22 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="lista_DG" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" Margin="5">
+            <DataGrid x:Name="lista_DG" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" Margin="5" SelectionChanged="lista_DG_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Asztal" Width="*"/>
-                    <DataGridTextColumn Header="Név" Width="*"/>
-                    <DataGridTextColumn Header="Dátum" Width="*"/>
-                    <DataGridTextColumn Header="Létszám" Width="0.5*"/>
+                    <DataGridTextColumn Header="Asztal" Width="*" Binding="{Binding Asztal.Megnevezes}"/>
+                    <DataGridTextColumn Header="Név" Width="*" Binding="{Binding Nev}"/>
+                    <DataGridTextColumn Header="Dátum" Width="*" Binding="{Binding Datum}"/>
+                    <DataGridTextColumn Header="Létszám" Width="0.5*" Binding="{Binding Letszam}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <StackPanel x:Name="gombok_SP" Grid.Row="1" VerticalAlignment="Center">
-                <Button x:Name="uj_BTN" Content="Új foglalás" Margin="5" Width="120" Padding="5"/>
-                <Button x:Name="mod_BTN" Content="Módosítás" Margin="5" Width="120" Padding="5"/>
-                <Button x:Name="torol_BTN" Content="Törlés" Margin="5" Width="120" Padding="5"/>
+                <Button x:Name="uj_BTN" Content="Új foglalás" Margin="5" Width="120" Padding="5" Click="uj_BTN_Click"/>
+                <Button x:Name="mod_BTN" Content="Módosítás" Margin="5" Width="120" Padding="5" Click="mod_BTN_Click"/>
+                <Button x:Name="torol_BTN" Content="Törlés" Margin="5" Width="120" Padding="5" Click="torol_BTN_Click"/>
             </StackPanel>
 
-            <Grid Grid.Row="1" Grid.Column="1">
+            <Grid x:Name="adatok_Grid" Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -50,12 +50,17 @@
                 <Label Content="Telefonszám:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
                 <Label Content="Dátum:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
                 <Label Content="Létszám:" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" IsEnabled="False"/>
-                <ComboBox x:Name="asztal_CBX" Grid.Row="0" Grid.Column="3" Margin="5"/>
-                <TextBox x:Name="nev_TXB" Grid.Row="1" Grid.Column="1" Margin="5"/>
-                <TextBox x:Name="tel_TXB" Grid.Row="1" Grid.Column="3" Margin="5"/>
-                <DatePicker x:Name="datum_DP" Grid.Row="2" Grid.Column="1" Margin="5"/>
-                <TextBox x:Name="letszam_TXB" Grid.Row="2" Grid.Column="3" Margin="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" IsEnabled="False" Text="{Binding Id}"/>
+                <ComboBox x:Name="asztal_CBX" Grid.Row="0" Grid.Column="3" Margin="5" SelectedItem="{Binding Asztal}"/>
+                <TextBox x:Name="nev_TXB" Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Nev}"/>
+                <TextBox x:Name="tel_TXB" Grid.Row="1" Grid.Column="3" Margin="5" Text="{Binding Telefonszam}"/>
+                <DatePicker x:Name="datum_DP" Grid.Row="2" Grid.Column="1" Margin="5" SelectedDate="{Binding Datum}"/>
+                <TextBox x:Name="letszam_TXB" Grid.Row="2" Grid.Column="3" Margin="5" Text="{Binding Letszam}"/>
+
+                <WrapPanel VerticalAlignment="Center" Grid.Row="3" Grid.Column="4">
+                    <Button x:Name="mentes_btn" Content="Mentés" Width="120" Margin="5" Padding="5" Click="mentes_btn_Click"/>
+                    <Button x:Name="megse_btn" Content="Mégse" Width="120" Margin="5" Padding="5" Click="megse_btn_Click"/>
+                </WrapPanel>
             </Grid>
         </Grid>
     </Grid>
